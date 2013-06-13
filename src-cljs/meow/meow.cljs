@@ -5,6 +5,7 @@
   (:use-macros [webfui.framework.macros :only [add-dom-watch add-mouse-watch]]))
 
 
+
 (defn c-log [x]
   (.log js/console x)
   x)
@@ -24,7 +25,7 @@
 (defn render-all
   "feed this to webfui.framework/launch-app"
   [state]
-  (let [{:keys [words stack dragged-word val]} state
+  (let [{:keys [words stack dragged-word val editing-word-name]} state
         [x y] (:point dragged-word)]
     [:div#content
      [:header
@@ -38,10 +39,10 @@
       [:h2 "Stack"]
       [:div#stack.demo {:style {:min-height "2em"}}
        (map (fn [{:keys [name]}] [:div.word {}  name]) stack)]
-      [:small {} (clj->js val)]
+      [:small {} (.stringify js/JSON (clj->js val))]
       [:div
-       [:input#quot-name {:watch :quot-name}]
-       [:button#clear.btn.btn-blue "Save Quot and Clear the Stack"]]]
+       [:input#quot-name {:watch :quot-name :value editing-word-name}]
+       [:button#clear.btn.btn-blue {:mouse :word-enter} "Save Quot and Clear the Stack"]]]
 
      (when dragged-word
        [:div.word {:style {:position "absolute"
@@ -51,6 +52,7 @@
 
 
 
+;watch mouse-move from the vocab to stack
 (add-mouse-watch :mouse-src [{:keys [stack] :as state} first-el last-el points]
                  (let [last-el-id                    (-> last-el  second :id)
                        {:keys [data-name data-data]} (second first-el)
@@ -61,8 +63,18 @@
                      {:dragged-word nil
                       :val   (evaluate (map :data new-stack))
                       :stack new-stack}
-                     {:dragged-word {:point (c-log (last points))
+                     {:dragged-word {:point (last points)
                                      :name  (word :name)}})))
+
+;add word to vocab
+(add-dom-watch :quot-name [{:keys [stack words] :as state} new-el]
+               (let [{:keys [value]} (second new-el)]
+                 {:editing-word-name value}))
+
+
+(add-mouse-watch :word-enter [{:keys [words stack editing-word-name]} fe le ps]
+                 {:words (conj words {:name editing-word-name :data (map (fn [{:keys [data]}] data) stack)})
+                  :stack []})
 
 (def words
   (concat
@@ -73,6 +85,8 @@
 
 
 (launch-app (atom {:words words
-                   :stack []
-                   :dragged-word nil
-                   :edited-quot nil}) render-all)
+                   :stack             []
+                   :dragged-word      nil
+                   :edited-quot       nil
+                   :val               nil
+                   :editing-word-name ""}) render-all)
