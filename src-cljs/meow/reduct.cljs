@@ -61,5 +61,4 @@
                                              (trampoline kall x xs ws)))}))
 
 (defn evaluate [quot]
-  (.log js/console quot)
   ((trampoline reduct quot [] dictionary) :stack))

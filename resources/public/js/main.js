@@ -21811,11 +21811,11 @@ meow.reduct.visualize = function visualize(stack) {
     return"|"
   }, stack))
 };
-meow.reduct.reduct = function reduct(p__20391, stack, words) {
-  var vec__20393 = p__20391;
-  var x = cljs.core.nth.call(null, vec__20393, 0, null);
-  var xs = cljs.core.nthnext.call(null, vec__20393, 1);
-  var quot = vec__20393;
+meow.reduct.reduct = function reduct(p__23739, stack, words) {
+  var vec__23741 = p__23739;
+  var x = cljs.core.nth.call(null, vec__23741, 0, null);
+  var xs = cljs.core.nthnext.call(null, vec__23741, 1);
+  var quot = vec__23741;
   if(cljs.core.empty_QMARK_.call(null, quot)) {
     return cljs.core.PersistentArrayMap.fromArray(["\ufdd0:stack", stack, "\ufdd0:words", words], true)
   }else {
@@ -21868,23 +21868,23 @@ meow.reduct.kall = function kall(x, stack, words) {
     }
   }
 };
-meow.reduct.dictionary = cljs.core.conj.call(null, meow.vocab.prelude, cljs.core.PersistentArrayMap.fromArray(["\ufdd0:call", function(p__20394, ws) {
-  var vec__20395 = p__20394;
-  var x = cljs.core.nth.call(null, vec__20395, 0, null);
-  var xs = cljs.core.nthnext.call(null, vec__20395, 1);
+meow.reduct.dictionary = cljs.core.conj.call(null, meow.vocab.prelude, cljs.core.PersistentArrayMap.fromArray(["\ufdd0:call", function(p__23742, ws) {
+  var vec__23743 = p__23742;
+  var x = cljs.core.nth.call(null, vec__23743, 0, null);
+  var xs = cljs.core.nthnext.call(null, vec__23743, 1);
   return cljs.core.trampoline.call(null, meow.reduct.kall, x, xs, ws)
-}, "\ufdd0:dip", function(p__20396, ws) {
-  var vec__20397 = p__20396;
-  var x = cljs.core.nth.call(null, vec__20397, 0, null);
-  var y = cljs.core.nth.call(null, vec__20397, 1, null);
-  var xs = cljs.core.nthnext.call(null, vec__20397, 2);
+}, "\ufdd0:dip", function(p__23744, ws) {
+  var vec__23745 = p__23744;
+  var x = cljs.core.nth.call(null, vec__23745, 0, null);
+  var y = cljs.core.nth.call(null, vec__23745, 1, null);
+  var xs = cljs.core.nthnext.call(null, vec__23745, 2);
   return cljs.core.cons.call(null, y, cljs.core.trampoline.call(null, meow.reduct.kall, x, xs, ws))
-}, "\ufdd0:if", function(p__20398, ws) {
-  var vec__20399 = p__20398;
-  var x = cljs.core.nth.call(null, vec__20399, 0, null);
-  var y = cljs.core.nth.call(null, vec__20399, 1, null);
-  var z = cljs.core.nth.call(null, vec__20399, 2, null);
-  var xs = cljs.core.nthnext.call(null, vec__20399, 3);
+}, "\ufdd0:if", function(p__23746, ws) {
+  var vec__23747 = p__23746;
+  var x = cljs.core.nth.call(null, vec__23747, 0, null);
+  var y = cljs.core.nth.call(null, vec__23747, 1, null);
+  var z = cljs.core.nth.call(null, vec__23747, 2, null);
+  var xs = cljs.core.nthnext.call(null, vec__23747, 3);
   if(cljs.core._EQ_.call(null, z, "\ufdd0:true")) {
     return cljs.core.trampoline.call(null, meow.reduct.kall, y, xs, ws)
   }else {
@@ -21892,7 +21892,6 @@ meow.reduct.dictionary = cljs.core.conj.call(null, meow.vocab.prelude, cljs.core
   }
 }], true));
 meow.reduct.evaluate = function evaluate(quot) {
-  console.log(quot);
   return cljs.core.trampoline.call(null, meow.reduct.reduct, quot, cljs.core.PersistentVector.EMPTY, meow.reduct.dictionary).call(null, "\ufdd0:stack")
 };
 goog.provide("cljs.reader");
@@ -24553,91 +24552,147 @@ goog.require("meow.reduct");
 goog.require("webfui.utilities");
 goog.require("webfui.framework");
 meow.meow.c_log = function c_log(x) {
-  console.log(x);
+  console.log(cljs.core.clj__GT_js.call(null, x));
   return x
 };
-meow.meow.render_word = function render_word(p__8672) {
-  var map__8674 = p__8672;
-  var map__8674__$1 = cljs.core.seq_QMARK_.call(null, map__8674) ? cljs.core.apply.call(null, cljs.core.hash_map, map__8674) : map__8674;
-  var data = cljs.core.get.call(null, map__8674__$1, "\ufdd0:data");
-  var name = cljs.core.get.call(null, map__8674__$1, "\ufdd0:name");
-  return cljs.core.PersistentVector.fromArray(["\ufdd0:div.word", cljs.core.PersistentArrayMap.fromArray(["\ufdd0:mouse", "\ufdd0:mouse-src", "\ufdd0:draggable", "true", "\ufdd0:data-name", name, "\ufdd0:data-data", data], true), name], true)
+meow.meow.el_active_QMARK_ = function el_active_QMARK_(el) {
+  return webfui.utilities.get_attribute.call(null, el, "\ufdd0:active")
+};
+meow.meow.render_word = function render_word(watch_id) {
+  return function(p__26765) {
+    var map__26766 = p__26765;
+    var map__26766__$1 = cljs.core.seq_QMARK_.call(null, map__26766) ? cljs.core.apply.call(null, cljs.core.hash_map, map__26766) : map__26766;
+    var id = cljs.core.get.call(null, map__26766__$1, "\ufdd0:id");
+    var data = cljs.core.get.call(null, map__26766__$1, "\ufdd0:data");
+    var name = cljs.core.get.call(null, map__26766__$1, "\ufdd0:name");
+    return cljs.core.PersistentVector.fromArray(["\ufdd0:div.word", cljs.core.PersistentArrayMap.fromArray(["\ufdd0:mouse", watch_id, "\ufdd0:draggable", "true", "\ufdd0:data-name", name, "\ufdd0:data-data", data, "\ufdd0:data-id", id], true), name], true)
+  }
+};
+meow.meow.render_stack = function render_stack(stack) {
+  if(cljs.core.empty_QMARK_.call(null, stack)) {
+    return null
+  }else {
+    var vec__26768 = stack;
+    var x = cljs.core.nth.call(null, vec__26768, 0, null);
+    var xs = cljs.core.nthnext.call(null, vec__26768, 1);
+    var clas = cljs.core.seq_QMARK_.call(null, x) ? "seq" : typeof x === "number" ? "num" : true ? "op" : null;
+    return cljs.core.list.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0:div", cljs.core.PersistentArrayMap.fromArray(["\ufdd0:class", [cljs.core.str("stack-val "), cljs.core.str(clas)].join("")], true), cljs.core.seq_QMARK_.call(null, x) ? render_stack.call(null, x) : String(cljs.core.clj__GT_js.call(null, x))], true), render_stack.call(null, xs))
+  }
 };
 meow.meow.render_all = function render_all(state) {
-  var map__8679 = state;
-  var map__8679__$1 = cljs.core.seq_QMARK_.call(null, map__8679) ? cljs.core.apply.call(null, cljs.core.hash_map, map__8679) : map__8679;
-  var editing_word_name = cljs.core.get.call(null, map__8679__$1, "\ufdd0:editing-word-name");
-  var val = cljs.core.get.call(null, map__8679__$1, "\ufdd0:val");
-  var dragged_word = cljs.core.get.call(null, map__8679__$1, "\ufdd0:dragged-word");
-  var stack = cljs.core.get.call(null, map__8679__$1, "\ufdd0:stack");
-  var words = cljs.core.get.call(null, map__8679__$1, "\ufdd0:words");
-  var vec__8680 = (new cljs.core.Keyword("\ufdd0:point")).call(null, dragged_word);
-  var x = cljs.core.nth.call(null, vec__8680, 0, null);
-  var y = cljs.core.nth.call(null, vec__8680, 1, null);
-  return cljs.core.PersistentVector.fromArray(["\ufdd0:div#content", cljs.core.PersistentVector.fromArray(["\ufdd0:header", cljs.core.PersistentVector.fromArray(["\ufdd0:h1", "Meow"], true), cljs.core.PersistentVector.fromArray(["\ufdd0:i", "Con Cat Cat"], true)], true), cljs.core.PersistentVector.fromArray(["\ufdd0:section", cljs.core.PersistentVector.fromArray(["\ufdd0:h2", "Predefined Words"], true), cljs.core.PersistentVector.fromArray(["\ufdd0:div#words.demo", cljs.core.map.call(null, meow.meow.render_word, 
-  words)], true)], true), cljs.core.PersistentVector.fromArray(["\ufdd0:section", cljs.core.PersistentVector.fromArray(["\ufdd0:h2", "Stack"], true), cljs.core.PersistentVector.fromArray(["\ufdd0:div#stack.demo", cljs.core.PersistentArrayMap.fromArray(["\ufdd0:style", cljs.core.PersistentArrayMap.fromArray(["\ufdd0:min-height", "2em"], true)], true), cljs.core.map.call(null, function(p__8681) {
-    var map__8682 = p__8681;
-    var map__8682__$1 = cljs.core.seq_QMARK_.call(null, map__8682) ? cljs.core.apply.call(null, cljs.core.hash_map, map__8682) : map__8682;
-    var name = cljs.core.get.call(null, map__8682__$1, "\ufdd0:name");
-    return cljs.core.PersistentVector.fromArray(["\ufdd0:div.word", cljs.core.ObjMap.EMPTY, name], true)
-  }, stack)], true), cljs.core.PersistentVector.fromArray(["\ufdd0:small", cljs.core.ObjMap.EMPTY, JSON.stringify(cljs.core.clj__GT_js.call(null, val))], true), cljs.core.PersistentVector.fromArray(["\ufdd0:div", cljs.core.PersistentVector.fromArray(["\ufdd0:input#quot-name", cljs.core.PersistentArrayMap.fromArray(["\ufdd0:watch", "\ufdd0:quot-name", "\ufdd0:value", editing_word_name], true)], true), cljs.core.PersistentVector.fromArray(["\ufdd0:button#clear.btn.btn-blue", cljs.core.PersistentArrayMap.fromArray(["\ufdd0:mouse", 
-  "\ufdd0:word-enter"], true), "Save Quot and Clear the Stack"], true)], true)], true), cljs.core.truth_(dragged_word) ? cljs.core.PersistentVector.fromArray(["\ufdd0:div.word", cljs.core.PersistentArrayMap.fromArray(["\ufdd0:style", cljs.core.PersistentArrayMap.fromArray(["\ufdd0:position", "absolute", "\ufdd0:top", y - 10, "\ufdd0:left", x + 5], true)], true), dragged_word.call(null, "\ufdd0:name")], true) : null], true)
+  var map__26771 = state;
+  var map__26771__$1 = cljs.core.seq_QMARK_.call(null, map__26771) ? cljs.core.apply.call(null, cljs.core.hash_map, map__26771) : map__26771;
+  var editing_word_name = cljs.core.get.call(null, map__26771__$1, "\ufdd0:editing-word-name");
+  var val = cljs.core.get.call(null, map__26771__$1, "\ufdd0:val");
+  var dragged_word = cljs.core.get.call(null, map__26771__$1, "\ufdd0:dragged-word");
+  var note = cljs.core.get.call(null, map__26771__$1, "\ufdd0:note");
+  var words = cljs.core.get.call(null, map__26771__$1, "\ufdd0:words");
+  var vec__26772 = (new cljs.core.Keyword("\ufdd0:point")).call(null, dragged_word);
+  var x = cljs.core.nth.call(null, vec__26772, 0, null);
+  var y = cljs.core.nth.call(null, vec__26772, 1, null);
+  return cljs.core.PersistentVector.fromArray(["\ufdd0:div#content", cljs.core.PersistentVector.fromArray(["\ufdd0:header", cljs.core.PersistentVector.fromArray(["\ufdd0:h1", "Meow"], true), cljs.core.PersistentVector.fromArray(["\ufdd0:i", "Con Cat Cat"], true)], true), cljs.core.PersistentVector.fromArray(["\ufdd0:div#stack", cljs.core.PersistentVector.fromArray(["\ufdd0:div.stack-contents", meow.meow.render_stack.call(null, val)], true)], true), cljs.core.PersistentVector.fromArray(["\ufdd0:section", 
+  cljs.core.PersistentVector.fromArray(["\ufdd0:h2", "Predefined Words"], true), cljs.core.PersistentVector.fromArray(["\ufdd0:div#words.demo", cljs.core.map.call(null, meow.meow.render_word.call(null, "\ufdd0:mouse-vocab"), words)], true)], true), cljs.core.PersistentVector.fromArray(["\ufdd0:section", cljs.core.PersistentVector.fromArray(["\ufdd0:h2", "Note"], true), cljs.core.PersistentVector.fromArray(["\ufdd0:div#note.demo", cljs.core.PersistentArrayMap.fromArray(["\ufdd0:style", cljs.core.PersistentArrayMap.fromArray(["\ufdd0:min-height", 
+  "2em"], true)], true), cljs.core.map.call(null, meow.meow.render_word.call(null, "\ufdd0:mouse-note"), note)], true), cljs.core.PersistentVector.fromArray(["\ufdd0:div", cljs.core.PersistentVector.fromArray(["\ufdd0:input#quot-name", cljs.core.PersistentArrayMap.fromArray(["\ufdd0:watch", "\ufdd0:quot-name", "\ufdd0:value", editing_word_name], true)], true), cljs.core.PersistentVector.fromArray(["\ufdd0:button#clear.btn.btn-blue", cljs.core.PersistentArrayMap.fromArray(["\ufdd0:mouse", "\ufdd0:word-enter"], 
+  true), "Save Quot and Clear the Note"], true), cljs.core.PersistentVector.fromArray(["\ufdd0:button#discard.btn.btn-blue", cljs.core.PersistentArrayMap.fromArray(["\ufdd0:mouse", "\ufdd0:word-dismiss"], true), "Discard the Note"], true)], true)], true), cljs.core.truth_(dragged_word) ? cljs.core.PersistentVector.fromArray(["\ufdd0:div.word", cljs.core.PersistentArrayMap.fromArray(["\ufdd0:style", cljs.core.PersistentArrayMap.fromArray(["\ufdd0:position", "absolute", "\ufdd0:top", y - 10, "\ufdd0:left", 
+  x + 5], true)], true), dragged_word.call(null, "\ufdd0:name")], true) : null], true)
 };
-webfui.framework.add_mouse_watch_helper.call(null, "\ufdd0:mouse-src", function(p__8683, first_el, last_el, points) {
-  var map__8684 = p__8683;
-  var map__8684__$1 = cljs.core.seq_QMARK_.call(null, map__8684) ? cljs.core.apply.call(null, cljs.core.hash_map, map__8684) : map__8684;
-  var state = map__8684__$1;
-  var stack = cljs.core.get.call(null, map__8684__$1, "\ufdd0:stack");
+webfui.framework.add_mouse_watch_helper.call(null, "\ufdd0:mouse-vocab", function(p__26773, first_el, last_el, points) {
+  var map__26774 = p__26773;
+  var map__26774__$1 = cljs.core.seq_QMARK_.call(null, map__26774) ? cljs.core.apply.call(null, cljs.core.hash_map, map__26774) : map__26774;
+  var state = map__26774__$1;
+  var last_id = cljs.core.get.call(null, map__26774__$1, "\ufdd0:last-id");
+  var note = cljs.core.get.call(null, map__26774__$1, "\ufdd0:note");
   var last_el_id = (new cljs.core.Keyword("\ufdd0:id")).call(null, cljs.core.second.call(null, last_el));
-  var map__8685 = cljs.core.second.call(null, first_el);
-  var map__8685__$1 = cljs.core.seq_QMARK_.call(null, map__8685) ? cljs.core.apply.call(null, cljs.core.hash_map, map__8685) : map__8685;
-  var data_data = cljs.core.get.call(null, map__8685__$1, "\ufdd0:data-data");
-  var data_name = cljs.core.get.call(null, map__8685__$1, "\ufdd0:data-name");
-  var word = cljs.core.PersistentArrayMap.fromArray(["\ufdd0:name", data_name, "\ufdd0:data", data_data], true);
-  var new_stack = cljs.core.conj.call(null, stack, word);
+  var map__26775 = cljs.core.second.call(null, first_el);
+  var map__26775__$1 = cljs.core.seq_QMARK_.call(null, map__26775) ? cljs.core.apply.call(null, cljs.core.hash_map, map__26775) : map__26775;
+  var data_data = cljs.core.get.call(null, map__26775__$1, "\ufdd0:data-data");
+  var data_name = cljs.core.get.call(null, map__26775__$1, "\ufdd0:data-name");
+  var word = cljs.core.PersistentArrayMap.fromArray(["\ufdd0:name", data_name, "\ufdd0:data", data_data, "\ufdd0:id", last_id + 1], true);
+  var new_note = cljs.core.conj.call(null, note, word);
   if(function() {
-    var and__3941__auto__ = cljs.core.not.call(null, webfui.utilities.get_attribute.call(null, first_el, "\ufdd0:active"));
+    var and__3941__auto__ = cljs.core.not.call(null, meow.meow.el_active_QMARK_.call(null, first_el));
     if(and__3941__auto__) {
-      return cljs.core._EQ_.call(null, last_el_id, "\ufdd0:stack")
+      return cljs.core._EQ_.call(null, last_el_id, "\ufdd0:note")
     }else {
       return and__3941__auto__
     }
   }()) {
-    return cljs.core.PersistentArrayMap.fromArray(["\ufdd0:dragged-word", null, "\ufdd0:val", meow.reduct.evaluate.call(null, cljs.core.map.call(null, "\ufdd0:data", new_stack)), "\ufdd0:stack", new_stack], true)
+    return cljs.core.PersistentArrayMap.fromArray(["\ufdd0:dragged-word", null, "\ufdd0:val", meow.reduct.evaluate.call(null, cljs.core.map.call(null, "\ufdd0:data", new_note)), "\ufdd0:note", new_note, "\ufdd0:last-id", last_id + 1], true)
   }else {
     return cljs.core.PersistentArrayMap.fromArray(["\ufdd0:dragged-word", cljs.core.PersistentArrayMap.fromArray(["\ufdd0:point", cljs.core.last.call(null, points), "\ufdd0:name", word.call(null, "\ufdd0:name")], true)], true)
   }
 }, "\ufdd0:full");
-webfui.framework.add_dom_watch_helper.call(null, "\ufdd0:quot-name", function(p__8686, new_el) {
-  var map__8687 = p__8686;
-  var map__8687__$1 = cljs.core.seq_QMARK_.call(null, map__8687) ? cljs.core.apply.call(null, cljs.core.hash_map, map__8687) : map__8687;
-  var state = map__8687__$1;
-  var words = cljs.core.get.call(null, map__8687__$1, "\ufdd0:words");
-  var stack = cljs.core.get.call(null, map__8687__$1, "\ufdd0:stack");
-  var map__8688 = cljs.core.second.call(null, new_el);
-  var map__8688__$1 = cljs.core.seq_QMARK_.call(null, map__8688) ? cljs.core.apply.call(null, cljs.core.hash_map, map__8688) : map__8688;
-  var value = cljs.core.get.call(null, map__8688__$1, "\ufdd0:value");
+webfui.framework.add_mouse_watch_helper.call(null, "\ufdd0:mouse-note", function(p__26776, first_el, last_el, points) {
+  var map__26777 = p__26776;
+  var map__26777__$1 = cljs.core.seq_QMARK_.call(null, map__26777) ? cljs.core.apply.call(null, cljs.core.hash_map, map__26777) : map__26777;
+  var state = map__26777__$1;
+  var note = cljs.core.get.call(null, map__26777__$1, "\ufdd0:note");
+  var map__26778 = cljs.core.second.call(null, first_el);
+  var map__26778__$1 = cljs.core.seq_QMARK_.call(null, map__26778) ? cljs.core.apply.call(null, cljs.core.hash_map, map__26778) : map__26778;
+  var data_id = cljs.core.get.call(null, map__26778__$1, "\ufdd0:data-id");
+  var new_note = cljs.core.filter.call(null, function(map__26778, map__26778__$1, data_id) {
+    return function(p__26779) {
+      var map__26780 = p__26779;
+      var map__26780__$1 = cljs.core.seq_QMARK_.call(null, map__26780) ? cljs.core.apply.call(null, cljs.core.hash_map, map__26780) : map__26780;
+      var id = cljs.core.get.call(null, map__26780__$1, "\ufdd0:id");
+      return cljs.core.not_EQ_.call(null, id, parseInt(data_id))
+    }
+  }(map__26778, map__26778__$1, data_id), note);
+  if(cljs.core.truth_(meow.meow.el_active_QMARK_.call(null, first_el))) {
+    return cljs.core.PersistentArrayMap.fromArray(["\ufdd0:val", meow.reduct.evaluate.call(null, cljs.core.map.call(null, "\ufdd0:data", new_note)), "\ufdd0:note", new_note], true)
+  }else {
+    return null
+  }
+}, "\ufdd0:full");
+webfui.framework.add_dom_watch_helper.call(null, "\ufdd0:quot-name", function(p__26781, new_el) {
+  var map__26782 = p__26781;
+  var map__26782__$1 = cljs.core.seq_QMARK_.call(null, map__26782) ? cljs.core.apply.call(null, cljs.core.hash_map, map__26782) : map__26782;
+  var state = map__26782__$1;
+  var words = cljs.core.get.call(null, map__26782__$1, "\ufdd0:words");
+  var note = cljs.core.get.call(null, map__26782__$1, "\ufdd0:note");
+  var map__26783 = cljs.core.second.call(null, new_el);
+  var map__26783__$1 = cljs.core.seq_QMARK_.call(null, map__26783) ? cljs.core.apply.call(null, cljs.core.hash_map, map__26783) : map__26783;
+  var value = cljs.core.get.call(null, map__26783__$1, "\ufdd0:value");
   return cljs.core.PersistentArrayMap.fromArray(["\ufdd0:editing-word-name", value], true)
 });
-webfui.framework.add_mouse_watch_helper.call(null, "\ufdd0:word-enter", function(p__8689, fe, le, ps) {
-  var map__8690 = p__8689;
-  var map__8690__$1 = cljs.core.seq_QMARK_.call(null, map__8690) ? cljs.core.apply.call(null, cljs.core.hash_map, map__8690) : map__8690;
-  var editing_word_name = cljs.core.get.call(null, map__8690__$1, "\ufdd0:editing-word-name");
-  var stack = cljs.core.get.call(null, map__8690__$1, "\ufdd0:stack");
-  var words = cljs.core.get.call(null, map__8690__$1, "\ufdd0:words");
-  return cljs.core.PersistentArrayMap.fromArray(["\ufdd0:words", cljs.core.conj.call(null, words, cljs.core.PersistentArrayMap.fromArray(["\ufdd0:name", editing_word_name, "\ufdd0:data", cljs.core.map.call(null, function(p__8691) {
-    var map__8692 = p__8691;
-    var map__8692__$1 = cljs.core.seq_QMARK_.call(null, map__8692) ? cljs.core.apply.call(null, cljs.core.hash_map, map__8692) : map__8692;
-    var data = cljs.core.get.call(null, map__8692__$1, "\ufdd0:data");
+webfui.framework.add_mouse_watch_helper.call(null, "\ufdd0:word-enter", function(p__26784, fe, le, ps) {
+  var map__26785 = p__26784;
+  var map__26785__$1 = cljs.core.seq_QMARK_.call(null, map__26785) ? cljs.core.apply.call(null, cljs.core.hash_map, map__26785) : map__26785;
+  var editing_word_name = cljs.core.get.call(null, map__26785__$1, "\ufdd0:editing-word-name");
+  var note = cljs.core.get.call(null, map__26785__$1, "\ufdd0:note");
+  var words = cljs.core.get.call(null, map__26785__$1, "\ufdd0:words");
+  return cljs.core.PersistentArrayMap.fromArray(["\ufdd0:words", cljs.core.conj.call(null, words, cljs.core.PersistentArrayMap.fromArray(["\ufdd0:name", editing_word_name, "\ufdd0:data", cljs.core.map.call(null, function(p__26786) {
+    var map__26787 = p__26786;
+    var map__26787__$1 = cljs.core.seq_QMARK_.call(null, map__26787) ? cljs.core.apply.call(null, cljs.core.hash_map, map__26787) : map__26787;
+    var data = cljs.core.get.call(null, map__26787__$1, "\ufdd0:data");
     return data
-  }, stack)], true)), "\ufdd0:stack", cljs.core.PersistentVector.EMPTY], true)
+  }, note)], true)), "\ufdd0:note", cljs.core.PersistentVector.EMPTY, "\ufdd0:val", null, "\ufdd0:editing-word-name", ""], true)
 }, "\ufdd0:full");
+webfui.framework.add_mouse_watch_helper.call(null, "\ufdd0:word-dismiss", function() {
+  var G__26788__delegate = function(_) {
+    return cljs.core.PersistentArrayMap.fromArray(["\ufdd0:note", cljs.core.PersistentVector.EMPTY, "\ufdd0:val", null, "\ufdd0:editing-word-name", ""], true)
+  };
+  var G__26788 = function(var_args) {
+    var _ = null;
+    if(arguments.length > 0) {
+      _ = cljs.core.array_seq(Array.prototype.slice.call(arguments, 0), 0)
+    }
+    return G__26788__delegate.call(this, _)
+  };
+  G__26788.cljs$lang$maxFixedArity = 0;
+  G__26788.cljs$lang$applyTo = function(arglist__26789) {
+    var _ = cljs.core.seq(arglist__26789);
+    return G__26788__delegate(_)
+  };
+  G__26788.cljs$core$IFn$_invoke$arity$variadic = G__26788__delegate;
+  return G__26788
+}(), "\ufdd0:full");
 meow.meow.words = cljs.core.concat.call(null, cljs.core.map.call(null, function(k) {
   return cljs.core.PersistentArrayMap.fromArray(["\ufdd0:data", k, "\ufdd0:name", cljs.core.rest.call(null, goog.string.htmlEscape([cljs.core.str(k)].join("")))], true)
 }, cljs.core.keys.call(null, meow.reduct.dictionary)), cljs.core.map.call(null, function(x) {
   return cljs.core.PersistentArrayMap.fromArray(["\ufdd0:data", x, "\ufdd0:name", [cljs.core.str(x)].join("")], true)
-}, cljs.core.range.call(null, 0, 20)), cljs.core.PersistentVector.fromArray([cljs.core.PersistentArrayMap.fromArray(["\ufdd0:data", cljs.core.PersistentVector.EMPTY, "\ufdd0:name", "[]"], true)], true));
-webfui.framework.launch_app.call(null, cljs.core.atom.call(null, cljs.core.PersistentArrayMap.fromArray(["\ufdd0:words", meow.meow.words, "\ufdd0:stack", cljs.core.PersistentVector.EMPTY, "\ufdd0:dragged-word", null, "\ufdd0:edited-quot", null, "\ufdd0:val", null, "\ufdd0:editing-word-name", ""], true)), meow.meow.render_all);
+}, cljs.core.range.call(null, 0, 20)), cljs.core.PersistentVector.fromArray([cljs.core.PersistentArrayMap.fromArray(["\ufdd0:data", cljs.core.List.EMPTY, "\ufdd0:name", "[]"], true)], true));
+webfui.framework.launch_app.call(null, cljs.core.atom.call(null, cljs.core.PersistentArrayMap.fromArray(["\ufdd0:words", meow.meow.words, "\ufdd0:note", cljs.core.PersistentVector.EMPTY, "\ufdd0:dragged-word", null, "\ufdd0:edited-quot", null, "\ufdd0:val", null, "\ufdd0:editing-word-name", ""], true)), meow.meow.render_all);
 goog.provide("example.hello");
 goog.require("cljs.core");
 goog.require("webfui.framework");

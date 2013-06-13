@@ -115,7 +115,7 @@ i {
     overflow: hidden;
 }
 
-#stack {
+#note {
     overflow: hidden;
     margin-bottom: 4px;
 }
@@ -131,3 +131,37 @@ i {
     padding: 3px 8px;
     margin: 4px;
 }
+
+#stack {
+    width: 150px;
+    margin: 20px;
+    height: 500px;
+    border: 1px solid #a3a3a3;
+    border-top: 0px;
+    float: left;
+    position: relative;
+}
+
+.stack-contents {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+
+.stack-val {
+    border-bottom: 1px solid #a3a3a3;
+    text-align: center;
+}
+
+    .stack-val.seq {
+        padding: 4px;
+        background-color: #828d2d;
+    }
+
+    .stack-val.num {
+        background-color: #e6c213;
+    }
+
+    .stack-val.op {
+        background-color: #3588c2;
+    }
