@@ -1,35 +1,15 @@
 # meow
 
-FIXME: description
-
-## Installation
-
-Download from http://example.com/FIXME.
+A WIP graphical stack language.
 
 ## Usage
 
-FIXME: explanation
+Visit https://ympbyc.github.io/meow/
 
-    $ java -jar meow-0.1.0-standalone.jar [args]
+## Develop
 
-## Options
+Clone this repo. Install clojure and leiningen and hack away!
 
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
-
-## License
-
-Copyright © 2013 FIXME
+Copyright © 2013 Minori Yamashita
 
 Distributed under the Eclipse Public License, the same as Clojure.
